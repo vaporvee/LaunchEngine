@@ -3,14 +3,12 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { invoke } from '@tauri-apps/api'
-
-
+import { open } from '@tauri-apps/api/shell';
 
 function App() {
-  const [count, setCount] = useState(0)
   const [message, setMessage] = useState("")
-  
-  invoke('greet', { name: 'App' })
+
+  invoke('greet', { name: 'World' })
   .then((response) => {setMessage(response as string)})
   return (
     <>
@@ -24,8 +22,8 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={() => open("https://vaporvee.com")}>
+          Open external
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
