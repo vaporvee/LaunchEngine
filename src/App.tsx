@@ -4,14 +4,14 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { invoke } from '@tauri-apps/api'
 
-let message: string
 
-invoke('greet', { name: 'App' })
-.then((response) => {message = response as string})
 
 function App() {
   const [count, setCount] = useState(0)
-
+  const [message, setMessage] = useState("")
+  
+  invoke('greet', { name: 'App' })
+  .then((response) => {setMessage(response as string)})
   return (
     <>
       <div>
