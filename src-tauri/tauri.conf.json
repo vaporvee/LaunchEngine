@@ -13,6 +13,13 @@
     "allowlist": {
       "shell": {
         "open": true
+      },
+      "fs": {
+        "all": true,
+        "scope": ["**"]
+      },
+      "path": {
+        "all": true
       }
     },
     "bundle": {
@@ -46,22 +53,22 @@
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
         "timestampUrl": ""
-        }
-        },
-        "security": {
-          "csp": null
-          },
-          "updater": {
-            "active": false
-            },
-            "windows": [
-              {
-                "fullscreen": false,
-                "height": 600,
-                "resizable": true,
-                "title": "Launch Engine",
-                "width": 800
-                }
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 600,
+        "resizable": true,
+        "title": "Launch Engine",
+        "width": 800
+      }
     ]
   }
 }
