@@ -3,7 +3,7 @@
     "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm run dev",
     "devPath": "http://localhost:5173",
-    "distDir": "../build"
+    "distDir": "../dist"
   },
   "package": {
     "productName": "Launch Engine",
@@ -21,12 +21,15 @@
         "all": true,
         "scope": ["**"]
       },
+      "os": {
+        "all": true
+      },
       "path": {
         "all": true
       }
     },
     "bundle": {
-      "active": true,
+      "active": false,
       "category": "DeveloperTool",
       "copyright": "",
       "deb": {
