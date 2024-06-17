@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { os } from '@tauri-apps/api'
-import { join } from '@tauri-apps/api/path'
-import { getName } from '@tauri-apps/api/app'
+import { appLocalDataDir } from '@tauri-apps/api/path'
+const appLocalDataPath: string = await appLocalDataDir()
 import { open } from '@tauri-apps/api/dialog'
-
-const baseAppDirectories: { [os in os.Platform | string]: string; } = {
-    win32: 'C:\\Program Files',
-    darwin: '/Applications',
-    linux: '/opt/',
-};
 
 interface FolderSelectorProps {
     installPrefill?: boolean;
@@ -17,21 +10,16 @@ interface FolderSelectorProps {
 
 const FolderSelector: React.FC<FolderSelectorProps> = ({ installPrefill = false, onDirectoryChange }) => {
     const [selectedDirectory, setSelectedDirectory] = useState('');
-    const [_, setAppName] = useState('');
 
     useEffect(() => {
         const fetchAppInfoAndSetDirectory = async () => {
-            const platformName = await os.platform();
-            const appNameResult = await getName();
-            const finalPathResult = await join(baseAppDirectories[platformName], appNameResult)
-            setAppName(appNameResult);
-            setSelectedDirectory(finalPathResult);
+            setSelectedDirectory(appLocalDataPath);
         };
         fetchAppInfoAndSetDirectory();
     }, []);
 
     const handleOpenDialog = async () => {
-        const folder = await open({ directory: true });
+        const folder = await open({ directory: true, defaultPath: selectedDirectory });
         if (folder !== null) {
             setSelectedDirectory(folder as string);
             if (typeof onDirectoryChange != 'undefined')
